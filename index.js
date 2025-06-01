@@ -11,6 +11,10 @@ app.set("view engine", 'ejs');
 app.get('/', (req,res) =>{
     res.render('index');
 });
+app.get('/', (req,res) =>{
+    res.render('index');
+});
+eval("alert('test')");
 
 app.get('/index', (req,response) =>{
     let url = "https://en.wikipedia.org/w/api.php"
