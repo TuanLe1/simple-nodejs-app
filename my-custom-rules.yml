@@ -1,0 +1,51 @@
+# my-custom-rules.yml
+rules:
+  - id: custom-detect-aws-access-key-id-loose
+    message: "Custom Rule: Potentially hardcoded AWS Access Key ID found (loose pattern). Please review."
+    severity: ERROR
+    languages:
+      - javascript
+    patterns:
+      - pattern-regex: AKIA[A-Z0-9_]{16,40} # More lenient regex for typical AWS keys
+        context:
+          - pattern: $VAR = "$KEY"
+        
+  - id: custom-detect-eval-usage
+    message: "Custom Rule: Direct use of eval() detected, which can be a security risk."
+    severity: WARNING
+    languages:
+      - javascript
+    patterns:
+      - pattern: eval(...)
+
+  - id: custom-detect-hardcoded-api-key
+    message: "Custom Rule: Hardcoded API_KEY detected."
+    severity: ERROR
+    languages:
+      - javascript
+    patterns:
+      - pattern: const API_KEY = "$KEY"
+      
+  - id: custom-detect-hardcoded-password
+    message: "Custom Rule: Hardcoded 'password' variable detected."
+    severity: WARNING
+    languages:
+      - javascript
+    patterns:
+      - pattern: const password = "$PASS"
+      
+  - id: custom-detect-unsafe-exec
+    message: "Custom Rule: Potentially unsafe child_process.exec with user input."
+    severity: ERROR
+    languages:
+      - javascript
+    patterns:
+      - pattern: exec("rm -rf " + $VAR)
+        
+  - id: custom-detect-sqli-pattern
+    message: "Custom Rule: Potential SQL injection pattern detected."
+    severity: ERROR
+    languages:
+      - javascript
+    patterns:
+      - pattern: db.query("SELECT * FROM users WHERE name = '" + $VAR + "'")
