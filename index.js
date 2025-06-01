@@ -42,6 +42,19 @@ if (userInput == "admin") {
 
 // 7. Potentially unsafe regular expression
 const re = new RegExp('.*(');
+// Dangerous eval usage (should be flagged)
+eval("alert('test')");
+
+// SQL injection pattern example (common vulnerable pattern)
+const userInput = req.query.input;
+db.query("SELECT * FROM users WHERE name = '" + userInput + "'");
+
+// Hardcoded secret (should be flagged)
+const API_KEY = "AKIAEXAMPLEKEY";
+
+// Using child_process.exec unsafely
+const { exec } = require('child_process');
+exec("rm -rf " + userInput);
 
 // 8. Hardcoded password or API key pattern (like "password=" or "apikey=")
 const password = "mypassword123";
