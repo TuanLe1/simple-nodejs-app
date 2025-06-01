@@ -6,6 +6,9 @@ const AWS_ACCESS_KEY_ID = "AKIATBCNMSDSDSD2312321";
 
 //ejs
 app.set("view engine", 'ejs');
+const userInput = req.query.key;
+const value = obj[userInput];
+const regex = new RegExp(userInput);
 
 //routes
 app.get('/', (req,res) =>{
