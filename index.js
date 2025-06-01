@@ -15,6 +15,36 @@ app.get('/', (req,res) =>{
     res.render('index');
 });
 eval("alert('test')");
+// 1. Using eval() — often flagged as dangerous (but may not be by default)
+eval("console.log('hello')");
+
+// 2. Using process.env in an insecure way (some rules look for this)
+const secret = process.env.SECRET_KEY + "123";
+
+// 3. Unused variable (common linting rule)
+const unusedVar = 42;
+
+// 4. Duplicate function definition (you already have this, but default may or may not catch it)
+function foo() {
+  return 1;
+}
+function foo() {
+  return 2;
+}
+
+// 5. Using == instead of === (loose equality)
+if (userInput == "admin") {
+  console.log("Admin detected");
+}
+
+// 6. Comment with TODO or FIXME (some rules flag these)
+ // TODO: remove before production
+
+// 7. Potentially unsafe regular expression
+const re = new RegExp('.*(');
+
+// 8. Hardcoded password or API key pattern (like "password=" or "apikey=")
+const password = "mypassword123";
 
 app.get('/index', (req,response) =>{
     let url = "https://en.wikipedia.org/w/api.php"
