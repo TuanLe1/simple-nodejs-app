@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const request = require('request');
 const wikip = require('wiki-infobox-parser');
+const AWS_ACCESS_KEY_ID = "AKIATBCNMSDSDSD2312321";
 
 //ejs
 app.set("view engine", 'ejs');
